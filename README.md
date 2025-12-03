@@ -25,20 +25,24 @@ See the [sample-project](./sample-project/) directory for a complete working exa
 cd sample-project
 
 # Create network
+
 docker network create pgbouncer-net
 
 # Start PostgreSQL
+
 docker run -d --name postgres-db --network pgbouncer-net \
   -e POSTGRES_DB=testdb -e POSTGRES_USER=testuser -e POSTGRES_PASSWORD=testpass \
   postgres:16-alpine
 
 # Start PgBouncer
+
 docker run -d --name pgbouncer --network pgbouncer-net -p 6432:6432 \
   -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro \
   -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt:ro \
   cleanstart/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
 
 # Test connection
+
 docker run --rm -it --network pgbouncer-net postgres:16-alpine \
   psql -h pgbouncer -p 6432 -U testuser -d testdb
 ```
@@ -130,34 +134,42 @@ Useful commands:
 
 ## Troubleshooting
 
-**View logs:**
+- *View logs:**
 ```bash
 docker logs pgbouncer
 ```
 
-**Check configuration:**
+- *Check configuration:**
 Verify pgbouncer.ini syntax and userlist.txt format
 
-**Connection issues:**
+- *Connection issues:**
 - Ensure PostgreSQL is accessible from PgBouncer container
 - Verify network connectivity
 - Check authentication credentials
 
 ## Resources
 
-- [Sample Project](./sample-project/README.md) - Working example
-- [PgBouncer Documentation](https://www.pgbouncer.org/)
-- [Configuration Reference](https://www.pgbouncer.org/config.html)
+- **Official Documentation:** https://www.google.com/search?q=pgbouncer+documentation
+- **Provenance / SBOM / Signature:** https://images.cleanstart.com/images/pgbouncer
+- **Docker Hub:** https://hub.docker.com/r/cleanstart/pgbouncer
+- **CleanStart All Images:** https://images.cleanstart.com
+- **CleanStart Community Images:** https://hub.docker.com/u/cleanstart
 
 ## Directory Structure
 
 ```
 pgbouncer/
 ├── README.md                    # This file
+
 ├── kubernetes - AWS/            # Kubernetes deployment files
+
 └── sample-project/              # Working example
+
     ├── README.md                # Usage instructions
+
     ├── pgbouncer.ini            # Configuration example
+
     ├── userlist.txt             # Authentication example
+
     └── Dockerfile               # Custom image example
 ```
