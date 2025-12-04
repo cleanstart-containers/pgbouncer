@@ -19,9 +19,6 @@ PgBouncer is a lightweight connection pooler for PostgreSQL databases. It reduce
 
 ## Quick Start
 
-
-## Quick Start
-
 ### Pull Commands
 ```bash
 docker pull ghcr.io/cleanstart-containers/pgbouncer:latest
