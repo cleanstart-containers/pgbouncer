@@ -154,10 +154,10 @@ Verify pgbouncer.ini syntax and userlist.txt format
 
 ### Multi-Platform Images
 ```bash
-docker pull --platform linux/amd64 cleanstart/pgbouncer:latest
+docker pull --platform linux/amd64 ghcr.io/cleanstart-containers/pgbouncer:latest
 ```
 ```bash
-docker pull --platform linux/arm64 cleanstart/pgbouncer:latest
+docker pull --platform linux/arm64 ghcr.io/cleanstart-containers/pgbouncer:latest
 ```
 
 ---
