@@ -139,6 +139,14 @@ Useful commands:
 docker logs pgbouncer
 ```
 
+- *Check configuration:**
+Verify pgbouncer.ini syntax and userlist.txt format
+
+- *Connection issues:**
+- Ensure PostgreSQL is accessible from PgBouncer container
+- Verify network connectivity
+- Check authentication credentials
+
 
 ---
 
@@ -153,15 +161,6 @@ docker pull --platform linux/arm64 cleanstart/pgbouncer:latest
 ```
 
 ---
-
-
-- *Check configuration:**
-Verify pgbouncer.ini syntax and userlist.txt format
-
-- *Connection issues:**
-- Ensure PostgreSQL is accessible from PgBouncer container
-- Verify network connectivity
-- Check authentication credentials
 
 ## Resources
 
