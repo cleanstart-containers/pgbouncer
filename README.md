@@ -6,7 +6,7 @@ PgBouncer is a lightweight connection pooler for PostgreSQL databases. It reduce
 
 ## Image Information
 
-- **Image Name**: `cleanstart/pgbouncer:latest`
+- **Image Name**: `ghcr.io/cleanstart-containers/pgbouncer:latest`
 - **Base User**: `clnstrt` (non-root)
 - **Entrypoint**: `/usr/bin/pgbouncer`
 - **Default Port**: 6432
@@ -39,7 +39,7 @@ docker run -d --name postgres-db --network pgbouncer-net \
 docker run -d --name pgbouncer --network pgbouncer-net -p 6432:6432 \
   -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro \
   -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt:ro \
-  cleanstart/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
+  ghcr.io/cleanstart-containers/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
 
 # Test connection
 
@@ -68,7 +68,7 @@ docker run -d \
   -p 6432:6432 \
   -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro \
   -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt:ro \
-  cleanstart/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
+  ghcr.io/cleanstart-containers/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
 ```
 
 ## Required Configuration Files
