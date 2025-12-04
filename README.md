@@ -139,6 +139,22 @@ Useful commands:
 docker logs pgbouncer
 ```
 
+
+---
+
+## Architecture Support
+
+### Multi-Platform Images
+```bash
+docker pull --platform linux/amd64 cleanstart/pgbouncer:latest
+```
+```bash
+docker pull --platform linux/arm64 cleanstart/pgbouncer:latest
+```
+
+---
+
+
 - *Check configuration:**
 Verify pgbouncer.ini syntax and userlist.txt format
 
@@ -154,22 +170,3 @@ Verify pgbouncer.ini syntax and userlist.txt format
 - **Docker Hub:** https://hub.docker.com/r/cleanstart/pgbouncer
 - **CleanStart All Images:** https://images.cleanstart.com
 - **CleanStart Community Images:** https://hub.docker.com/u/cleanstart
-
-## Directory Structure
-
-```
-pgbouncer/
-├── README.md                    # This file
-
-├── kubernetes - AWS/            # Kubernetes deployment files
-
-└── sample-project/              # Working example
-
-    ├── README.md                # Usage instructions
-
-    ├── pgbouncer.ini            # Configuration example
-
-    ├── userlist.txt             # Authentication example
-
-    └── Dockerfile               # Custom image example
-```
