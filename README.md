@@ -29,7 +29,7 @@ docker pull ghcr.io/cleanstart-containers/pgbouncer:latest-dev
 
 Basic test:
 ```bash
-docker run -it --name openldap-test ghcr.io/cleanstart-containers/pgbouncer:latest-dev
+docker run -it --name pgbouncer-test ghcr.io/cleanstart-containers/pgbouncer:latest-dev
 ```
 
 
@@ -48,12 +48,14 @@ docker run -d --name postgres-db --network pgbouncer-net \
   -e POSTGRES_DB=testdb -e POSTGRES_USER=testuser -e POSTGRES_PASSWORD=testpass \
   postgres:16-alpine
 
+
 # Start PgBouncer
+# Create valid pgbouncer.ini config file, to test furthur
 
 docker run -d --name pgbouncer --network pgbouncer-net -p 6432:6432 \
-  -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro \
-  -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt:ro \
-  ghcr.io/cleanstart-containers/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
+  -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer-other.ini/pgbouncer.ini:ro \
+  -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt/userlist.txt:ro \
+  ghcr.io/cleanstart-containers/pgbouncer:latest /etc/pgbouncer/pgbouncer-other.ini/pgbouncer.ini
 
 # Test connection
 
@@ -77,90 +79,13 @@ docker run --rm -it --network pgbouncer-net postgres:16-alpine \
 ## Basic Usage
 
 ```bash
-docker run -d \
+docker run -d \                                                                                           
   --name pgbouncer \
   -p 6432:6432 \
-  -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro \
-  -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt:ro \
-  ghcr.io/cleanstart-containers/pgbouncer:latest /etc/pgbouncer/pgbouncer.ini
+  -v $(pwd)/pgbouncer.ini:/etc/pgbouncer/pgbouncer-other.ini/pgbouncer.ini:ro \
+  -v $(pwd)/userlist.txt:/etc/pgbouncer/userlist.txt/userlist.txt:ro \
+  ghcr.io/cleanstart-containers/pgbouncer:latest /etc/pgbouncer/pgbouncer-other.ini/pgbouncer.ini
 ```
-
-## Required Configuration Files
-
-### 1. pgbouncer.ini
-
-Example configuration:
-```ini
-[databases]
-mydb = host=postgres-host port=5432 dbname=mydb
-
-[pgbouncer]
-listen_addr = 0.0.0.0
-listen_port = 6432
-auth_type = md5
-auth_file = /etc/pgbouncer/userlist.txt
-pool_mode = session
-default_pool_size = 20
-max_client_conn = 100
-```
-
-### 2. userlist.txt
-
-Format: `"username" "password"`
-
-Example for plain text (development):
-```
-"myuser" "mypassword"
-```
-
-For MD5 authentication (production):
-```
-"myuser" "md5abc123..."
-```
-
-Generate MD5 password:
-```bash
-echo -n "passwordusername" | md5sum
-```
-
-## Admin Console
-
-Connect to the special `pgbouncer` database:
-
-```bash
-psql -h localhost -p 6432 -U admin_user -d pgbouncer
-```
-
-Useful commands:
-- `SHOW POOLS;` - Pool statistics
-- `SHOW STATS;` - Query statistics
-- `SHOW DATABASES;` - Configured databases
-- `SHOW CLIENTS;` - Client connections
-- `SHOW SERVERS;` - Server connections
-- `RELOAD;` - Reload configuration
-
-## Security
-
-- Runs as non-root user (`clnstrt`)
-- Supports MD5, SCRAM-SHA-256 authentication
-- Use Docker networks for isolation
-- Configure TLS/SSL for encrypted connections
-
-## Troubleshooting
-
-- *View logs:**
-```bash
-docker logs pgbouncer
-```
-
-- *Check configuration:**
-Verify pgbouncer.ini syntax and userlist.txt format
-
-- *Connection issues:**
-- Ensure PostgreSQL is accessible from PgBouncer container
-- Verify network connectivity
-- Check authentication credentials
-
 
 ---
 
