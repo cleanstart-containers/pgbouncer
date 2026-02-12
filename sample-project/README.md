@@ -80,7 +80,7 @@ docker run --rm -it --network pgbouncer-net postgres:16-alpine \
 # Or non-interactive with password
 docker run --rm --network pgbouncer-net -e PGPASSWORD=testpass postgres:16-alpine \
   psql -h pgbouncer -p 6432 -U testuser -d testdb \
-  -c "SELECT 'Hello from PgBouncer!' as message;"
+  -c "SELECT 'Hello from PgBouncer\!' as message;"
 ```
 
 Create test data:
