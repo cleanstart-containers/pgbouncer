@@ -106,5 +106,5 @@ docker pull --platform linux/arm64 ghcr.io/cleanstart-containers/pgbouncer:lates
 - **Official Documentation:** https://www.google.com/search?q=pgbouncer+documentation
 - **Provenance / SBOM / Signature:** https://images.cleanstart.com/images/pgbouncer
 - **Docker Hub:** https://hub.docker.com/r/cleanstart/pgbouncer
-- **CleanStart All Images:** https://images.cleanstart.com
+- **CleanStart All Images:** https://images.cleanstart.com/images/pgbouncer/details
 - **CleanStart Community Images:** https://hub.docker.com/u/cleanstart
