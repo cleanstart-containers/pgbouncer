@@ -135,7 +135,7 @@ spec:
     spec:
       containers:
       - name: pgbouncer
-        image: cleanstart/pgbouncer:latest
+        image: cleanstart/pgbouncer:latest-dev
         ports:
         - containerPort: 6432
         command: ["/usr/bin/pgbouncer"]
